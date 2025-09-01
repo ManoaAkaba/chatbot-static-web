@@ -16,7 +16,14 @@ document.getElementById("loginBtn").addEventListener("click", () => {
     console.log("Access Token:", accessToken);
 
     // ここでチャットボットを初期化する（bot.jsなどに分けてもOK）
-    initializeBot(accessToken);
+    
+fetch("https://your-backend-api.com/generateToken")
+  .then(res => res.json())
+  .then(data => {
+    const directLineToken = data.token;
+    initializeBot(directLineToken, accessToken);
+  });
+
   }).catch(error => {
     console.error("ログイン失敗:", error);
   });
